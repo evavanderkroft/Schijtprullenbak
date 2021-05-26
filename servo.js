@@ -8,12 +8,12 @@ const board = new Board();
 
 
 
-app.get('/rotateOne', (req, res) => {
+app.get('/rotatePlastic', (req, res) => {
     res.send("Rotate 90!")
     servoOne()
 })
 
-app.get('/rotateTwo', (req, res) => {
+app.get('/rotateRestafval', (req, res) => {
     res.send("Rotate 0!")
     servoTwo()
 })
