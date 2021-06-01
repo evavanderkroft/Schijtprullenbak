@@ -46,9 +46,12 @@
     }
 
     async function loop() {
-        webcam.update(); // update the webcam frame
-        let prediction = await predict();
-        window.requestAnimationFrame(loop);
+
+
+            webcam.update(); // update the webcam frame
+            let prediction = await predict();
+            window.requestAnimationFrame(loop);
+
 
         
         if(count == 0) {
@@ -67,12 +70,37 @@
         }
 
 
-
         if (count > 60) {
-            rotateOne();
+
+            if(previousPrediction == "Plastic") {
+                rotatePlastic();
+                count = -1
+
+                var delayInMilliseconds = 6000; 
+                setTimeout(function() {
+                    count = 0;
+                    }, delayInMilliseconds);
+                
+            }
+
+            if(previousPrediction == "Papier") {
+                rotatePapier();
+                count = -1
+                setTimeout(function() {
+                    count = 0;
+                    }, 6000);
+            }
+
+            if(previousPrediction == "Restafval") {
+                rotateRestafval();
+                count = -1
+                setTimeout(function() {
+                    count = 0;
+                    }, 6000);
+            }
         }
 
-        console.log(count)
+        console.log("count: ", count)
         
 
     }
@@ -94,7 +122,6 @@
         predictionContainer.appendChild(div)
         
         console.log(prediction)
-
 
         return prediction;
     }
